@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>神言学アカデミー 受講コース一覧【特進メンバー用】</title>
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap');
+
+  :root{
+    --maxw: 1320px;
+    --gap: 22px;
+    --fz-body: 17.5px;
+    --fz-card-title: 24px;
+    --fz-desc: 14.5px;
+    --fz-feature: 15.5px;
+    --fz-price: 32px;
+
+    --c-bg0: #07070c;
+    --c-bg1: #0b0b14;
+    --c-text: rgba(255,255,255,0.92);
+    --c-muted: rgba(255,255,255,0.55);
+
+    --c-gold-0: #f7e7b6;
+    --c-gold-1: #c9a84c;
+    --c-gold-2: #a07830;
+
+    --c-std: #8fb5ff;
+    --c-exe: #72e7c9;
+    --c-rep: #d6a8ff;
+    --c-pr2: #ffb77a;
+
+    --card-surface: rgba(255,255,255,0.035);
+    --card-border: rgba(255,255,255,0.10);
+    --hairline: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    color: var(--c-text);
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-size: var(--fz-body);
+    line-height: 1.6;
+    background:
+      radial-gradient(1200px 600px at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 65%),
+      radial-gradient(900px 500px at 20% 30%, rgba(143,181,255,0.08) 0%, transparent 60%),
+      radial-gradient(900px 500px at 80% 35%, rgba(114,231,201,0.06) 0%, transparent 55%),
+      linear-gradient(180deg, var(--c-bg0) 0%, var(--c-bg1) 100%);
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 52px;
+    position: relative;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 760px; height: 240px;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.14) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .academy-badge {
+    display: inline-block;
+    border: 1px solid rgba(201,168,76,0.6);
+    color: rgba(201,168,76,0.95);
+    font-size: 11px;
+    letter-spacing: 4px;
+    padding: 6px 20px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.22);
+    backdrop-filter: blur(6px);
+  }
+  .header h1 {
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    background: linear-gradient(135deg, var(--c-gold-0) 0%, var(--c-gold-1) 38%, var(--c-gold-0) 70%, var(--c-gold-2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .header p {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.56);
+    letter-spacing: 0.08em;
+    line-height: 1.9;
+  }
+  .gold-line {
+    width: 90px; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.95), transparent);
+    margin: 20px auto;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.35);
+    margin: 0 auto 22px;
+    text-transform: uppercase;
+    max-width: var(--maxw);
+  }
+  .section-label span { color: rgba(201,168,76,0.95); }
+
+  /* ── Cards Layout ── */
+  .grid-top {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    display: grid;
+    gap: var(--gap);
+    margin-bottom: 44px;
+  }
+
+  .bottom-wrap {
+    max-width: var(--maxw);
+    margin: 0 auto 64px;
+    display: flex;
+    justify-content: center;
+    gap: var(--gap);
+    flex-wrap: wrap;
+  }
+  .bottom-wrap .card {
+    width: calc((min(var(--maxw), 100%) - (var(--gap) * 2)) / 3);
+    min-width: 300px;
+    max-width: 480px;
+  }
+
+  /* ── Card ── */
+  .card {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: var(--card-surface);
+    border: 1px solid var(--card-border);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 590px;
+    box-shadow:
+      0 16px 50px rgba(0,0,0,0.45),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  .card::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(600px 200px at 20% 0%, rgba(255,255,255,0.06) 0%, transparent 70%),
+      linear-gradient(180deg, rgba(0,0,0,0.05) 0%, transparent 35%);
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 24px 70px rgba(0,0,0,0.55),
+      0 0 0 1px rgba(201,168,76,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .card::after{
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+    pointer-events: none;
+  }
+
+  .card.standard{ border-color: rgba(143,181,255,0.30); }
+  .card.executive{ border-color: rgba(114,231,201,0.26); }
+  .card.repeat{ border-color: rgba(214,168,255,0.25); }
+  .card.premium-repeat{ border-color: rgba(255,183,122,0.26); }
+  .card.premium{ border-color: rgba(201,168,76,0.40); }
+
+  .card-header { padding: 26px 24px 16px; position: relative; z-index: 1; }
+  .card-tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
+  }
+  .standard .card-tag       { color: var(--c-std); border: 1px solid rgba(143,181,255,0.28); }
+  .executive .card-tag      { color: var(--c-exe); border: 1px solid rgba(114,231,201,0.24); }
+  .repeat .card-tag         { color: var(--c-rep); border: 1px solid rgba(214,168,255,0.24); }
+  .premium-repeat .card-tag { color: var(--c-pr2); border: 1px solid rgba(255,183,122,0.24); }
+  .premium .card-tag        { color: rgba(201,168,76,0.98); border: 1px solid rgba(201,168,76,0.30); }
+
+  .card-name {
+    font-size: var(--fz-card-title);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    margin-bottom: 9px;
+    line-height: 1.25;
+  }
+  .standard .card-name       { color: rgba(190,214,255,0.95); }
+  .executive .card-name      { color: rgba(168,255,230,0.92); }
+  .repeat .card-name         { color: rgba(245,228,255,0.92); }
+  .premium-repeat .card-name { color: rgba(255,225,195,0.94); }
+  .premium .card-name        { color: rgba(247,231,182,0.95); }
+
+  .card-desc {
+    font-size: var(--fz-desc);
+    color: rgba(255,255,255,0.58);
+    line-height: 1.8;
+    min-height: 56px;
+  }
+
+  .divider { height: 1px; background: var(--hairline); margin: 0 24px; position: relative; z-index: 1; }
+
+  .features {
+    padding: 16px 24px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .feature-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: var(--fz-feature);
+    color: rgba(255,255,255,0.82);
+    line-height: 1.55;
+  }
+  .feature-item.disabled {
+    color: rgba(255,255,255,0.24);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,255,255,0.12);
+  }
+  .icon-yes {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; flex-shrink: 0; font-weight: 900;
+    background: rgba(255,255,255,0.06);
+  }
+  .icon-no {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0;
+    background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.18);
+  }
+  .standard .icon-yes       { background: rgba(143,181,255,0.16); color: var(--c-std); }
+  .executive .icon-yes      { background: rgba(114,231,201,0.14); color: var(--c-exe); }
+  .repeat .icon-yes         { background: rgba(214,168,255,0.14); color: var(--c-rep); }
+  .premium-repeat .icon-yes { background: rgba(255,183,122,0.14); color: var(--c-pr2); }
+  .premium .icon-yes        { background: rgba(201,168,76,0.18); color: rgba(201,168,76,0.95); }
+
+  .price-box {
+    margin: 0;
+    padding: 14px 20px 16px;
+    border-top: 1px solid var(--hairline);
+    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 100%);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .price-box::before{
+    content:'';
+    position:absolute;
+    left: 0; right: 0; top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.18), transparent);
+    pointer-events:none;
+  }
+  .price-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.48);
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .price-amount {
+    font-size: var(--fz-price);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+  }
+  .price-unit {
+    font-size: 14px;
+    color: rgba(255,255,255,0.54);
+  }
+  .standard .price-amount       { color: var(--c-std); }
+  .executive .price-amount      { color: var(--c-exe); }
+  .repeat .price-amount         { color: var(--c-rep); }
+  .premium-repeat .price-amount { color: var(--c-pr2); }
+  .premium .price-amount        { color: rgba(201,168,76,0.98); }
+
+  /* ── Comparison Table ── */
+  .table-section {
+    max-width: var(--maxw);
+    margin: 0 auto 60px;
+  }
+  .table-section h2 {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 22px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .table-section h2 span { color: rgba(201,168,76,0.95); }
+
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .comp-table thead th {
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    white-space: nowrap;
+  }
+  .comp-table thead th:first-child {
+    text-align: left;
+    color: rgba(255,255,255,0.45);
+    font-weight: 400;
+  }
+  .th-std   { color: var(--c-std) !important; }
+  .th-pre   { color: rgba(201,168,76,0.98) !important; }
+  .th-exe   { color: var(--c-exe) !important; }
+  .th-rep   { color: var(--c-rep) !important; }
+  .th-pr2   { color: var(--c-pr2) !important; }
+
+  .comp-table tbody tr {
+    border-bottom: 1px solid var(--hairline);
+    transition: background 0.18s;
+  }
+  .comp-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+  .comp-table tbody td {
+    padding: 11px 10px;
+    text-align: center;
+    font-size: 15px;
+  }
+  .comp-table tbody td:first-child {
+    text-align: left;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    padding-left: 4px;
+  }
+  .comp-table tbody td .sub {
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,0.38);
+    margin-top: 2px;
+  }
+  .yes-std { color: var(--c-std); }
+  .yes-pre { color: rgba(201,168,76,0.95); }
+  .yes-exe { color: var(--c-exe); }
+  .yes-rep { color: var(--c-rep); }
+  .yes-pr2 { color: var(--c-pr2); }
+  .no-mark { color: rgba(255,255,255,0.18); }
+
+  /* Price row */
+  .comp-table .price-row td {
+    padding: 16px 10px;
+    font-weight: 900;
+    font-size: 15px;
+    border-top: 1px solid rgba(201,168,76,0.18);
+    border-bottom: none;
+    background: rgba(0,0,0,0.15);
+  }
+  .comp-table .price-row td:first-child {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.55);
+  }
+  .price-std { color: var(--c-std) !important; }
+  .price-pre { color: rgba(201,168,76,0.98) !important; }
+  .price-exe { color: var(--c-exe) !important; }
+  .price-rep { color: var(--c-rep) !important; }
+  .price-pr2 { color: var(--c-pr2) !important; }
+
+  /* Intensive fee table */
+  .fee-section {
+    max-width: var(--maxw);
+    margin: 0 auto 40px;
+  }
+  .fee-section h2 {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 22px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .fee-section h2 span { color: rgba(201,168,76,0.95); }
+
+  .fee-table {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  .fee-table td {
+    padding: 12px 16px;
+    font-size: 13.5px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .fee-table td:first-child {
+    color: rgba(255,255,255,0.72);
+    width: 70%;
+  }
+  .fee-table td:last-child {
+    text-align: right;
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  /* 2-col table: override bold — both price columns should be normal weight */
+  .fee-table-2col td:nth-child(2),
+  .fee-table-2col td:nth-child(3) {
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  .fee-free { color: var(--c-exe); }
+  .fee-low  { color: var(--c-rep); }
+  .fee-mid  { color: var(--c-pr2); }
+  .fee-high { color: rgba(255,120,120,0.9); }
+
+  .note-block {
+    max-width: 680px;
+    margin: 20px auto 0;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid rgba(201,168,76,0.45);
+    border-radius: 0 8px 8px 0;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.52);
+    line-height: 1.8;
+  }
+  .note-block strong { color: rgba(201,168,76,0.75); }
+
+  /* 2-column fee table */
+  .fee-table-2col { max-width: 780px; }
+  .fee-table-2col thead th {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.45);
+    border-bottom: 1px solid rgba(201,168,76,0.22);
+    text-align: center;
+  }
+  .fee-table-2col thead th:first-child { text-align: left; }
+  .fee-table-2col td:last-child,
+  .fee-table-2col td:nth-child(2) { text-align: center; }
+  .fee-table-2col td small {
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,0.38);
+    margin-top: 2px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 60px;
+    color: rgba(255,255,255,0.22);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .footer strong { color: rgba(201,168,76,0.6); }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .grid-top { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .bottom-wrap .card { width: calc((min(var(--maxw), 100%) - var(--gap)) / 2); }
+  }
+  @media (max-width: 700px) {
+    .comp-table { font-size: 12.5px; }
+    .comp-table thead th, .comp-table tbody td { padding: 9px 5px; }
+    .comp-table tbody td:first-child { font-size: 12.5px; }
+  }
+  @media (max-width: 650px) {
+    body { padding: 26px 14px; }
+    :root{
+      --fz-body: 18.5px;
+      --fz-card-title: 25px;
+      --fz-desc: 15.5px;
+      --fz-feature: 16.5px;
+      --fz-price: 33px;
+    }
+    .grid-top { grid-template-columns: 1fr !important; }
+    .bottom-wrap { flex-direction: column; align-items: stretch; }
+    .bottom-wrap .card { width: 100% !important; max-width: none !important; min-width: 0 !important; }
+    .card { min-height: auto; }
+    .features { padding-bottom: 10px; }
+    /* 比較表スクロール対応 */
+    .table-section, .fee-section { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .comp-table { min-width: 480px; font-size: 12px; }
+    .fee-table-2col { min-width: 360px; }
+    /* header 空白調整 */
+    .header { margin-bottom: 32px; }
+    .header::before { width: 100%; }
+    /* sectionラベル */
+    .section-label { font-size: 10px; letter-spacing: 2px; }
+    /* note-block */
+    .note-block { font-size: 12px; }
+  }
+
+
+  .grid-top { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+</style>
+</head>
+<body>
+
+
+<div class="header">
+  <div class="academy-badge">SHINGEN GAKU ACADEMY</div>
+  <h1>神言学アカデミー<br>受講コース一覧</h1>
+  <div class="gold-line"></div>
+  <p>神の教えを学び実践し、世の中に大きな影響を与え還元できる<br>経営者・経営幹部を輩出するアカデミー</p>
+</div>
+
+
+<!-- 上段：3枚 -->
+<div class="section-label">— <span>COURSE LINE UP</span> —</div>
+<div class="grid-top">
+
+  <div class="card standard">
+    <div class="card-header">
+      <div class="card-tag">MAIN COURSE</div>
+      <div class="card-name">本講座</div>
+      <p class="card-desc">神の教えを学び、実践し、社会に還元できる経営者を目指すコース。入学は年4回（1月・4月・7月・10月）。受講期間は1年間。</p>
+    </div>
+    <div class="divider"></div>
+    <div class="features">
+      <div class="feature-item"><div class="icon-yes">✓</div>動画講座（理の動画 / フリー）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>特別講義動画</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>経営幹部コース向け動画</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン学長グループワーク（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン学長グループコンサル（3ヶ月に1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン講座（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>集中講座（対面・年3回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特別講座（国内・海外合宿 年各1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>学長メールコンサル（年1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>学長個別LINE相談（月1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>特進コース食事会（年2〜4回）</div>
+    </div>
+    <div class="price-box">
+      <span class="price-label">受講料（税込）</span>
+      <span class="price-amount">1,100,000</span>
+      <span class="price-unit">円／年</span>
+    </div>
+  </div>
+
+
+  <div class="card premium">
+    <div class="card-header">
+      <div class="card-tag">PREMIUM ✦ INVITE ONLY</div>
+      <div class="card-name">特進コース</div>
+      <p class="card-desc">本講座の全内容に加え、より密度の高いプログラムを提供する招待制コース。</p>
+    </div>
+    <div class="divider"></div>
+    <div class="features">
+      <div class="feature-item"><div class="icon-yes">✓</div>動画講座（理の動画 / フリー）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特別講義動画</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>経営幹部コース向け動画</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン学長グループワーク（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン学長グループコンサル（3ヶ月に1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン講座（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>集中講座（対面・年3回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特別講座（国内・海外合宿 年各1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>学長メールコンサル（年1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>学長個別LINE相談（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特進コース食事会（年2〜4回）</div>
+    </div>
+    <div class="price-box">
+      <span class="price-label">受講料（税込）</span>
+      <span class="price-amount">1,650,000</span>
+      <span class="price-unit">円／年</span>
+    </div>
+  </div>
+
+
+  <div class="card executive">
+    <div class="card-header">
+      <div class="card-tag">EXECUTIVE</div>
+      <div class="card-name">経営幹部コース</div>
+      <p class="card-desc">共に学び会社組織の向上を目指す経営幹部向けプログラム。受講期間は1年間。</p>
+    </div>
+    <div class="divider"></div>
+    <div class="features">
+      <div class="feature-item"><div class="icon-yes">✓</div>動画講座（理の動画 / フリー）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>特別講義動画</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>経営幹部コース向け動画</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>オンライン学長グループワーク（月1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>オンライン学長グループコンサル（3ヶ月に1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン講座（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>集中講座（対面・年3回）<span style="font-size:10px;opacity:.6;margin-left:4px;">※1</span></div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>特別講座（国内・海外合宿 年各1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>学長メールコンサル（年1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>学長個別LINE相談（月1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>特進コース食事会（年2〜4回）</div>
+    </div>
+    <div class="price-box">
+      <span class="price-label">受講料（税込）</span>
+      <span class="price-amount">330,000</span>
+      <span class="price-unit">円／年</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- 下段：GRADUATE / SPECIAL -->
+<div class="section-label">— <span>GRADUATE / SPECIAL</span> —</div>
+<div class="bottom-wrap">
+
+  <div class="card repeat">
+    <div class="card-header">
+      <div class="card-tag">REPEAT / SUBSCRIPTION</div>
+      <div class="card-name">本講座<br>リピート受講</div>
+      <p class="card-desc">本講座卒業生向けの継続学習コース（サブスクリプション）。</p>
+    </div>
+    <div class="divider"></div>
+    <div class="features">
+      <div class="feature-item"><div class="icon-yes">✓</div>動画講座（理の動画 / フリー）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特別講義動画</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>経営幹部コース向け動画</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>オンライン学長グループワーク（月1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>オンライン学長グループコンサル（3ヶ月に1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン講座（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>集中講座（対面・年3回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特別講座（国内・海外合宿 年各1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>学長メールコンサル（年1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>学長個別LINE相談（月1回）</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>特進コース食事会（年2〜4回）</div>
+    </div>
+    <div class="price-box">
+      <span class="price-label">受講料（税込）</span>
+      <span class="price-amount">27,500</span>
+      <span class="price-unit">円／月</span>
+    </div>
+  </div>
+
+
+  <div class="card premium-repeat">
+    <div class="card-header">
+      <div class="card-tag">PREMIUM REPEAT ✦ INVITE &amp; SCREENING</div>
+      <div class="card-name">特進コース<br>リピート受講</div>
+      <p class="card-desc">特進コース・本講座卒業生向けの継続学習コース。招待制・入学審査制。</p>
+    </div>
+    <div class="divider"></div>
+    <div class="features">
+      <div class="feature-item"><div class="icon-yes">✓</div>動画講座（理の動画 / フリー）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特別講義動画</div>
+      <div class="feature-item disabled"><div class="icon-no">－</div>経営幹部コース向け動画</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン学長グループワーク（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン学長グループコンサル（3ヶ月に1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>オンライン講座（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>集中講座（対面・年3回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特別講座（国内・海外合宿 年各1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>学長メールコンサル（年1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>学長個別LINE相談（月1回）</div>
+      <div class="feature-item"><div class="icon-yes">✓</div>特進コース食事会（年2〜4回）</div>
+    </div>
+    <div class="price-box">
+      <span class="price-label">受講料（税込）</span>
+      <span class="price-amount">1,320,000</span>
+      <span class="price-unit">円／年</span>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="section-label" style="margin-top:20px;">— <span>COURSE COMPARISON</span> —</div>
+<div class="table-section">
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>受講内容</th>
+        <th class="th-std">本講座</th>
+        <th class="th-pre">特進コース<br><small style="font-weight:400;opacity:.7">招待制</small></th>
+        <th class="th-exe">経営幹部<br><small style="font-weight:400;opacity:.7">コース</small></th>
+        <th class="th-rep">本講座<br><small style="font-weight:400;opacity:.7">リピート</small></th>
+        <th class="th-pr2">特進<br><small style="font-weight:400;opacity:.7">リピート</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>動画講座（理の動画）</td>
+        <td class="yes-std">✓</td><td class="yes-pre">✓</td><td class="yes-exe">✓</td><td class="yes-rep">✓</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>特別講義動画</td>
+        <td class="no-mark">—</td><td class="yes-pre">✓</td><td class="no-mark">—</td><td class="yes-rep">✓</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>経営幹部コース向け動画</td>
+        <td class="no-mark">—</td><td class="no-mark">—</td><td class="yes-exe">✓</td><td class="no-mark">—</td><td class="no-mark">—</td>
+      </tr>
+      <tr>
+        <td>オンライン学長グループワーク<span class="sub">月1回</span></td>
+        <td class="yes-std">✓</td><td class="yes-pre">✓</td><td class="no-mark">—</td><td class="no-mark">—</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>オンライン学長グループコンサル<span class="sub">3ヶ月に1回</span></td>
+        <td class="yes-std">✓</td><td class="yes-pre">✓</td><td class="no-mark">—</td><td class="no-mark">—</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>オンライン講座<span class="sub">月1回</span></td>
+        <td class="yes-std">✓</td><td class="yes-pre">✓</td><td class="yes-exe">✓</td><td class="yes-rep">✓</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>集中講座（対面）<span class="sub">年3回 ※1</span></td>
+        <td class="yes-std">✓</td><td class="yes-pre">✓</td><td class="yes-exe">✓</td><td class="yes-rep">✓</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>特別講座（国内・海外合宿）<span class="sub">年各1回</span></td>
+        <td class="yes-std">✓</td><td class="yes-pre">✓</td><td class="no-mark">—</td><td class="yes-rep">✓</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>学長メールコンサル<span class="sub">年1回</span></td>
+        <td class="yes-std">✓</td><td class="yes-pre">✓</td><td class="no-mark">—</td><td class="no-mark">—</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>学長個別LINE相談<span class="sub">月1回</span></td>
+        <td class="no-mark">—</td><td class="yes-pre">✓</td><td class="no-mark">—</td><td class="no-mark">—</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr>
+        <td>特進コース食事会<span class="sub">年2〜4回</span></td>
+        <td class="no-mark">—</td><td class="yes-pre">✓</td><td class="no-mark">—</td><td class="no-mark">—</td><td class="yes-pr2">✓</td>
+      </tr>
+      <tr class="price-row">
+        <td>受講料（税込）</td>
+        <td class="price-std">1,100,000<br><small>円／年</small></td>
+        <td class="price-pre">1,650,000<br><small>円／年</small></td>
+        <td class="price-exe">330,000<br><small>円／年</small></td>
+        <td class="price-rep">27,500<br><small>円／月</small></td>
+        <td class="price-pr2">1,320,000<br><small>円／年</small></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note-block" style="max-width:100%;margin-top:14px;">
+    <strong>※1 経営幹部コースの集中講座内訳</strong><br>
+    年3回の内訳：「集中講座 2回」＋「経営幹部コース専用 特別講座 1回」
+  </div>
+</div>
+
+
+<div class="section-label" style="margin-top:10px;">— <span>集中講座 参加費</span> —</div>
+<div class="fee-section">
+  <table class="fee-table fee-table-2col">
+    <thead>
+      <tr>
+        <th>メンバーカテゴリ</th>
+        <th>会場受講</th>
+        <th>オンライン</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>神言学受講 一年目の受講生<br><small>通常コース・特進コースで学ぶ</small></td>
+        <td class="fee-free">無料</td>
+        <td class="fee-free">無料</td>
+      </tr>
+      <tr>
+        <td>法人プランの受講生</td>
+        <td class="fee-free">無料</td>
+        <td class="fee-free">無料</td>
+      </tr>
+      <tr>
+        <td>リピートプラン・特進コース<br><small>2年目以降の受講生</small></td>
+        <td class="fee-low">8,800円</td>
+        <td class="fee-low">6,600円</td>
+      </tr>
+      <tr>
+        <td>経営幹部コースで学ぶ受講生</td>
+        <td class="fee-mid">11,000円</td>
+        <td class="fee-mid">8,800円</td>
+      </tr>
+      <tr>
+        <td>神言学 未受講の方</td>
+        <td class="fee-high">110,000円</td>
+        <td class="fee-high">88,000円</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note-block">
+    <strong>※ 懇親会費について</strong><br>
+    各会場での懇親会費用は約 <strong>11,000〜15,000円（税込）</strong> が別途必要となります。
+  </div>
+</div>
+
+
+<div class="footer">
+  <p>© SHINGEN GAKU ACADEMY &nbsp;｜&nbsp; <strong>神言学アカデミー</strong></p>
+</div>
+
+
+</body>
+</html>
